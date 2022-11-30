@@ -1,8 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:f1_project_manager/screens/views/ListCircuitView.dart';
+import 'package:f1_project_manager/screens/views/ListPilotesView.dart';
+import 'package:f1_project_manager/screens/views/ListEcuriesView.dart';
+import 'package:f1_project_manager/screens/views/championnatView.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+  @override
+  State<StatefulWidget> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>{
+  PageController _pageController = PageController(initialPage: 0);
+  int _currentIndex = 0;
+
+  @override
+  void dispose(){
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +27,32 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: Center(
-        child: Text('home'),
+      body: PageView(
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        controller: _pageController,
+        children: const <Widget>[
+          championnatView(),
+          ListCircuitView(),
+          ListPilotesView(),
+          ListEcuriesView(),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (int index)
+        {
+          setState(() {
+            _currentIndex = index;
+          });
+
+          _pageController.jumpToPage(index);
+        },
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.blue,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.emoji_events),
