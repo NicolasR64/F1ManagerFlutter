@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class CircuitView extends StatelessWidget{
-  const CircuitView({Key? key}) : super(key: key);
+class ListCircuitView extends StatelessWidget{
+  const ListCircuitView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
