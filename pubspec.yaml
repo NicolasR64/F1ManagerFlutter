@@ -1,4 +1,4 @@
-git pull origin master --allow-unrelated-historiesname: f1_project_manager
+name: f1_project_manager
 description: Little project for school to learn flutter
 
 # The following line prevents the package from being accidentally published to
