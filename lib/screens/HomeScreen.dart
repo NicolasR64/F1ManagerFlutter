@@ -5,6 +5,8 @@ import 'package:f1_project_manager/screens/views/ListPilotesView.dart';
 import 'package:f1_project_manager/screens/views/ListEcuriesView.dart';
 import 'package:f1_project_manager/screens/views/championnatView.dart';
 
+import '../components/add_circuit_component.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
@@ -20,6 +22,8 @@ class _HomeScreenState extends State<HomeScreen>{
     _pageController.dispose();
     super.dispose();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen>{
           ListEcuriesView(),
         ],
       ),
+      floatingActionButton: AddCircuitComponent(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (int index)
