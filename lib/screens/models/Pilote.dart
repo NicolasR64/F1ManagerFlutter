@@ -12,5 +12,4 @@ class Pilote{
     required this.numero,
     required this.points,
 });
-
 }
