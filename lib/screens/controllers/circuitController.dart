@@ -12,7 +12,7 @@ void main() async {
     version: 1,
   );
 
-  // Define a function that inserts dogs into the database
+  // Define a function that inserts pilotes into the database
   Future<void> insertCircuit(Circuit circuit) async {
     // Get a reference to the database.
     final db = await database;
