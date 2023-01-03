@@ -2,7 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddCircuitComponent extends StatelessWidget {
-  const AddCircuitComponent({Key? key}) : super(key: key);
+  AddCircuitComponent({Key? key}) : super(key: key);
+
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose(){
+    _controller.dispose();
+  }
+
   void _modal(BuildContext context) => showModalBottomSheet(
       context: context,
       builder: (context) => Padding(
@@ -16,10 +24,11 @@ class AddCircuitComponent extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline6,
                     )
                 ),
-                const Padding(
+                Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                        decoration: InputDecoration(
+                        controller: _controller,
+                        decoration: const InputDecoration(
                             hintText: "Nom du circuit"
                         )
                     )
@@ -32,11 +41,27 @@ class AddCircuitComponent extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                             child: Text('Annuler'.toUpperCase())
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              // TO DO check data
+                              if(_controller.text.isNotEmpty){
+                                // TO DO
+                                // Delete print
+                                print(_controller.text);
+                                Navigator.pop(context);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text("Les valeurs ne peuvent pas être vides!")
+                                  ),
+                                );
+                              }
+                            },
                             child: Text('Ajouter'.toUpperCase())
                         )
                       ],

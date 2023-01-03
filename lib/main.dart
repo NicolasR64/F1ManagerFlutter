@@ -10,6 +10,7 @@ List<Circuit> listCircuit = circuitRepo.getAllCircuits();
 
 
 void main() {
+  print(listCircuit);
   runApp(const MyApp());
 }
 
@@ -23,7 +24,13 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<ListCircuitBloc>(
               lazy: false,
-              create: (context) => ListCircuitBloc(listCircuit))
+              create: (context) => ListCircuitBloc(
+                  listCircuit
+              )..add(OnInitializeListCircuitEvent()),
+          ),
+          BlocProvider(
+              create: (context) => AddCircuitBloc(),
+          )
         ],
         child: MaterialApp(
           title: 'F1 Manager 2024',
