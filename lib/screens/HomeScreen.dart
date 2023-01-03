@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:f1_project_manager/screens/views/ListCircuitView.dart';
 import 'package:f1_project_manager/screens/views/ListPilotesView.dart';
@@ -22,8 +21,19 @@ class _HomeScreenState extends State<HomeScreen>{
     _pageController.dispose();
     super.dispose();
   }
-
-
+  addFloatingActionButton(){
+    switch(_currentIndex) {
+      case 0:{
+        return null;
+      }
+      break;
+      case 1:{
+        return AddCircuitComponent();
+      }
+      break;
+    }
+    return AddCircuitComponent();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +48,14 @@ class _HomeScreenState extends State<HomeScreen>{
           });
         },
         controller: _pageController,
-        children: const <Widget>[
+        children: <Widget>[
           championnatView(),
           ListCircuitView(),
           ListPilotesView(),
           ListEcuriesView(),
         ],
       ),
-      floatingActionButton: AddCircuitComponent(),
+      floatingActionButton: addFloatingActionButton(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (int index)

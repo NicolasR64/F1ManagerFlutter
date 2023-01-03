@@ -1,14 +1,14 @@
 import 'Ecurie.dart';
 
 class Pilote{
-  final int id;
-  final String nom;
-  final String prenom;
-  final String numero;
-  final Ecurie ecurie;
-  final int points;
+  int id;
+  String nom;
+  String prenom;
+  String numero;
+  Ecurie ecurie;
+  int points;
 
-  const Pilote({
+  Pilote({
     required this.id,
     required this.nom,
     required this.prenom,

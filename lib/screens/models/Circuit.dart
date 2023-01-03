@@ -1,9 +1,9 @@
 class Circuit{
-  final int id;
-  final String nom;
-  final String pays;
+  int id;
+  String nom;
+  String pays;
 
-  const Circuit({
+  Circuit({
     required this.id,
     required this.nom,
     required this.pays,
@@ -16,6 +16,7 @@ class Circuit{
       'pays': pays,
     };
   }
+
 
   @override
   String toString() {

@@ -1,8 +1,8 @@
 class Ecurie{
-  final int id;
-  final String nom;
+  int id;
+  String nom;
 
-  const Ecurie({
+  Ecurie({
     required this.id,
     required this.nom,
 });

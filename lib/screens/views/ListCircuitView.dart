@@ -1,22 +1,17 @@
+import 'package:f1_project_manager/repositories/circuit_repo.dart';
+import 'package:f1_project_manager/screens/models/Circuit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-const List<Map<String, dynamic>> listMapping = [
-  {
-    'name': "#first",
-  },
-  {
-    'name': "#second",
-  },
-];
+circuitRepository circuitRepo = new circuitRepository();
 
 class ListCircuitView extends StatelessWidget{
-  const ListCircuitView({Key? key}) : super(key: key);
-
+  ListCircuitView({Key? key}) : super(key: key);
+  List<Circuit> listCircuit = circuitRepo.getAllCircuits();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: listMapping.length,
+        itemCount: listCircuit.length,
         itemBuilder: (context, index) {
           return Dismissible(
             key: Key(index.toString()),
@@ -32,7 +27,7 @@ class ListCircuitView extends StatelessWidget{
             ),
             child:Card(
               child :ListTile(
-                title: Text(listMapping[index]['name']),
+                title: Text(listCircuit[index].nom),
               ),
             ),
           );
