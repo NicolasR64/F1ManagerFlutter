@@ -1,14 +1,18 @@
+import 'package:f1_project_manager/screens/services/addCircuit/add_circuit_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddCircuitComponent extends StatelessWidget {
   AddCircuitComponent({Key? key}) : super(key: key);
 
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controllerNom = TextEditingController();
+  final TextEditingController _controllerPays = TextEditingController();
 
   @override
   void dispose(){
-    _controller.dispose();
+    _controllerNom.dispose();
+    _controllerPays.dispose();
   }
 
   void _modal(BuildContext context) => showModalBottomSheet(
@@ -27,9 +31,18 @@ class AddCircuitComponent extends StatelessWidget {
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                        controller: _controller,
+                        controller: _controllerNom,
                         decoration: const InputDecoration(
-                            hintText: "Nom du circuit"
+                            hintText: "Nom :"
+                        )
+                    )
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                        controller: _controllerPays,
+                        decoration: const InputDecoration(
+                            hintText: "Pay :"
                         )
                     )
                 ),
@@ -48,12 +61,11 @@ class AddCircuitComponent extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                              // TO DO check data
-                              if(_controller.text.isNotEmpty){
-                                // TO DO
-                                // Delete print
-                                print(_controller.text);
-                                Navigator.pop(context);
+                              Navigator.pop(context);
+                              if(_controllerNom.text.isNotEmpty && _controllerPays.text.isNotEmpty){
+                                context.read<AddCircuitBloc>().add(OnAddCircuitEvent(circuitNom: _controllerNom.text,circuitPays: _controllerPays.text ));
+                                _controllerNom.clear();
+                                _controllerPays.clear();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(

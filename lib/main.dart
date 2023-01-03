@@ -2,6 +2,7 @@ import 'package:f1_project_manager/repositories/circuit_repo.dart';
 import 'package:f1_project_manager/screens/HomeScreen.dart';
 import 'package:f1_project_manager/screens/models/Circuit.dart';
 import 'package:f1_project_manager/screens/services/ListCircuit/list_circuit_bloc.dart';
+import 'package:f1_project_manager/screens/services/addCircuit/add_circuit_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
