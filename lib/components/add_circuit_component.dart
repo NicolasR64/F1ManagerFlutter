@@ -17,70 +17,77 @@ class AddCircuitComponent extends StatelessWidget {
 
   void _modal(BuildContext context) => showModalBottomSheet(
       context: context,
-      builder: (context) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Wrap(
-              children: <Widget>[
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Création de circuits",
-                      style: Theme.of(context).textTheme.headline6,
-                    )
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                        controller: _controllerNom,
-                        decoration: const InputDecoration(
-                            hintText: "Nom :"
+      builder: (context) => BlocListener<AddCircuitBloc, AddCircuitState>(
+          listener: (context, state) {
+            if(state is AddCircuitSuccess){
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Circuit ajouté avec succès!')));
+            }
+            // TO DO
+            // Reload list
+          },
+              child: Wrap(
+                  children: <Widget>[
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Création de circuits",
+                          style: Theme.of(context).textTheme.headline6,
                         )
-                    )
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                        controller: _controllerPays,
-                        decoration: const InputDecoration(
-                            hintText: "Pay :"
-                        )
-                    )
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 20.0,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('Annuler'.toUpperCase())
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              if(_controllerNom.text.isNotEmpty && _controllerPays.text.isNotEmpty){
-                                context.read<AddCircuitBloc>().add(OnAddCircuitEvent(circuitNom: _controllerNom.text,circuitPays: _controllerPays.text ));
-                                _controllerNom.clear();
-                                _controllerPays.clear();
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text("Les valeurs ne peuvent pas être vides!")
-                                  ),
-                                );
-                              }
-                            },
-                            child: Text('Ajouter'.toUpperCase())
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                            controller: _controllerNom,
+                            decoration: const InputDecoration(
+                                hintText: "Nom :"
+                            )
                         )
-                      ],
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                            controller: _controllerPays,
+                            decoration: const InputDecoration(
+                                hintText: "Pay :"
+                            )
+                        )
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 20.0,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Annuler'.toUpperCase())
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  if(_controllerNom.text.isNotEmpty && _controllerPays.text.isNotEmpty){
+                                    context.read<AddCircuitBloc>().add(OnAddCircuitEvent(circuitNom: _controllerNom.text,circuitPays: _controllerPays.text ));
+                                    _controllerNom.clear();
+                                    _controllerPays.clear();
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text("Les valeurs ne peuvent pas être vides!")
+                                      ),
+                                    );
+                                    Navigator.pop(context);
+                                  }
+                                },
+                                child: Text('Ajouter'.toUpperCase())
+                            )
+                          ],
+                        )
                     )
-                )
 
-              ])
+                  ])
       )
   );
 
