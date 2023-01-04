@@ -16,3 +16,12 @@ class ListCircuitInitialState extends ListCircuitState{
   @override
   List<Object> get props => [listCircuit];
 }
+
+class ListCircuitUpdatedState extends ListCircuitState{
+  final List<Circuit> listCircuit;
+
+  const ListCircuitUpdatedState({required this.listCircuit});
+
+  @override
+  List<Object> get props => [listCircuit];
+}

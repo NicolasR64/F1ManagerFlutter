@@ -10,8 +10,4 @@ abstract class AddCircuitState extends Equatable {
 
 class AddCircuitInitialStage extends AddCircuitState {}
 
-class AddCircuitSuccess extends AddCircuitState {
-  // TO DO
-  // Add data in db
-  AddCircuitSuccess(Circuit circuit);
-}
+class AddCircuitSuccess extends AddCircuitState {}

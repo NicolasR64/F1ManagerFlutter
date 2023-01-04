@@ -8,4 +8,11 @@ abstract class ListCircuitEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnInitializeListCircuitEvent extends ListCircuitEvent {}
+class _OnUpdatedListCircuitEvent extends ListCircuitEvent {
+  final List<Circuit> circuits;
+
+  const _OnUpdatedListCircuitEvent({required this.circuits});
+
+  @override
+  List<Object> get props => [circuits];
+}

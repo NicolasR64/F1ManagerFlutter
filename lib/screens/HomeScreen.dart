@@ -31,6 +31,14 @@ class _HomeScreenState extends State<HomeScreen>{
         return AddCircuitComponent();
       }
       break;
+      case 2:{
+        return null;
+      }
+      break;
+      case 3:{
+        return null;
+      }
+      break;
     }
     return AddCircuitComponent();
   }

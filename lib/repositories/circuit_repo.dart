@@ -1,13 +1,23 @@
+import 'dart:async';
+
+import 'package:f1_project_manager/main.dart';
 import 'package:f1_project_manager/screens/models/Circuit.dart';
 
-class circuitRepository{
-  static Circuit circuit01 = new Circuit(id: 01, nom: 'monacco', pays: 'france');
-  static Circuit circuit02 = new Circuit(id: 02, nom: 'spa', pays: 'belgique');
-  final  List<Circuit> circuits = [circuit01, circuit02];
+class CircuitRepository{
+  final List<Circuit> listCircuits;
 
-  List<Circuit> getAllCircuits(){
-    return circuits;
+  CircuitRepository({required this.listCircuits}){
+    List<Circuit> circuits = listCircuits.map((e) => Circuit(id: e.id, nom: e.nom, pays: e.pays)).toList();
+    _circuitController.add(circuits);
   }
 
-  circuitRepository(){}
+  StreamController<List<Circuit>> _circuitController = StreamController<List<Circuit>>();
+
+  Stream<List<Circuit>> get circuits => _circuitController.stream;
+
+     // Stream.value(
+   //
+ // );
+
+
 }
