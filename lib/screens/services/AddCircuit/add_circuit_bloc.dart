@@ -15,9 +15,9 @@ class AddCircuitBloc extends Bloc<AddCircuitEvent, AddCircuitState> {
 
   AddCircuitBloc(this.circuitRepository) : super(AddCircuitInitialState()) {
     on<OnAddCircuitEvent>((event, emit) async {
+      print('OnAddCircuitEvent triggered');
       final Circuit circuit = Circuit(id: 0, nom: event.circuitNom, pays: event.circuitPays);
       await circuitRepository.addNewCircuit(circuit);
-      print('circuit ajouter : $circuit');
       emit(AddCircuitSuccessState(timestamp: DateTime.now().millisecondsSinceEpoch));
     });
   }

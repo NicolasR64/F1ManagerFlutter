@@ -1,6 +1,7 @@
 import 'package:f1_project_manager/repositories/circuit_repo.dart';
 import 'package:f1_project_manager/screens/models/Circuit.dart';
 import 'package:f1_project_manager/screens/services/ListCircuit/list_circuit_bloc.dart';
+import 'package:f1_project_manager/screens/services/RemoveCircuit/remove_circuit_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,41 +9,43 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListCircuitView extends StatelessWidget{
   ListCircuitView({Key? key}) : super(key: key);
-  List<Circuit> listCircuit = [];
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ListCircuitBloc, ListCircuitState>(builder: (context, state) {
-
-      print('state is : $state');
-      if(state is ListCircuitUpdatedState){
-        this.listCircuit = state.listCircuit;
-        print('liste afficher : $listCircuit');
-      }
-      return listCircuit.isEmpty
-          ? const Center(child: Text('Pas de circuits'))
-          : ListView.builder(
-            itemCount: listCircuit.length,
-            itemBuilder: (context, index) {
-              return Dismissible(
-                key: Key(index.toString()),
-                onDismissed: (direction) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('$index dismissed'),
-                    ),
-                  );
-                },
-                background: Container(
-                  color: Colors.red,
-                ),
-                child:Card(
-                  child :ListTile(
-                    title: Text(listCircuit[index].nom),
-                  ),
-                ),
-              );
+    return BlocListener<RemoveCircuitBloc, RemoveCircuitState>(
+        listener: (context, state) {
+          if (state is RemoveCircuitSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('circuit supprimer')));
+          }
+        },
+        child: BlocBuilder<ListCircuitBloc, ListCircuitState>(builder: (context, state) {
+            List<Circuit> listCircuit = [];
+            if(state is ListCircuitUpdatedState){
+              listCircuit = state.listCircuit;
             }
-        );
-    });
+            return listCircuit.isEmpty
+            ? const Center(child: Text('Pas de circuits'))
+            : ListView.builder(
+              itemCount: listCircuit.length,
+              itemBuilder: (context, index) {
+                return Dismissible(
+                  key: Key('${index.toString()}-${DateTime.now().microsecondsSinceEpoch}'),
+                  onDismissed: (direction) {
+                    print("Remove triggered");
+                    context.read<RemoveCircuitBloc>().add(OnRemoveCircuitEvent(id: listCircuit[index].id));
+                  },
+                  background: Container(
+                    color: Colors.red,
+                  ),
+                  child:Card(
+                    child :ListTile(
+                      title: Text(listCircuit[index].nom),
+                    ),
+                  ),
+                );
+              }
+            );
+        }),
+    );
   }
 }

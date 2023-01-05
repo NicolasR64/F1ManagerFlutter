@@ -19,13 +19,13 @@ class ListCircuitBloc extends Bloc<ListCircuitEvent, ListCircuitState> {
 
   ListCircuitBloc(this.circuitRepository) : super(ListCircuitInitialState(listCircuit: List<Circuit>.from([]))) {
     StreamSubscription<List<Circuit>> _streamSubscription = circuitRepository.circuits.listen((listCircuits) {
-      print('stream triggerd : $listCircuits');
+      print('_streamSubscription triggerd');
       add(_OnUpdatedListCircuitEvent(circuits: listCircuits));
       onError: (error) => print(error);
       onDone: (done) => print(done);
     });
     on<_OnUpdatedListCircuitEvent>((event, emit) {
-      print('event : $event');
+      print('_OnUpdatedListCircuitEvent triggered');
       emit(ListCircuitUpdatedState(listCircuit: event.circuits));
     });
   }
