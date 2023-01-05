@@ -16,8 +16,6 @@ class Circuit{
       'pays': pays,
     };
   }
-
-
   @override
   String toString() {
     return 'Circuit{id: $id, nom: $nom, pays: $pays}';

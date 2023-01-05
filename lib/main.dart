@@ -6,9 +6,28 @@ import 'package:f1_project_manager/screens/services/RemoveCircuit/remove_circuit
 import 'package:f1_project_manager/screens/services/addCircuit/add_circuit_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final Database database = await openDatabase(
+    join(await getDatabasesPath(), 'f1manager.db'),
+
+    onCreate: (db, version) {
+      return db.execute(
+        'CREATE TABLE circuits(id INTEGER PRIMARY KEY,nom TEXT,pays TEXT)',
+      );
+    },
+    version: 1,
+  );
+
+  final CircuitRepository circuitRepository = CircuitRepository(listCircuits: listCircuits, database: database);
+
+  await circuitRepository.initialize();
+
+  runApp(MyApp(circuitRepository: circuitRepository,));
 }
 
 Circuit circuit01 = new Circuit(id: 01, nom: 'monacco', pays: 'france');
@@ -16,12 +35,14 @@ Circuit circuit02 = new Circuit(id: 02, nom: 'spa', pays: 'belgique');
 final List<Circuit> listCircuits = [circuit01, circuit02];
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final CircuitRepository circuitRepository;
+
+  MyApp({super.key, required this.circuitRepository,});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final CircuitRepository circuitRepository = CircuitRepository(listCircuits: listCircuits);
+
 
     return MultiBlocProvider(
         providers: [
