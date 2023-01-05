@@ -2,9 +2,12 @@ import 'package:f1_project_manager/repositories/circuit_repo.dart';
 import 'package:f1_project_manager/screens/models/Circuit.dart';
 import 'package:f1_project_manager/screens/services/ListCircuit/list_circuit_bloc.dart';
 import 'package:f1_project_manager/screens/services/RemoveCircuit/remove_circuit_bloc.dart';
+import 'package:f1_project_manager/screens/views/CircuitDetailsView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 
 class ListCircuitView extends StatelessWidget{
@@ -37,9 +40,17 @@ class ListCircuitView extends StatelessWidget{
                   background: Container(
                     color: Colors.red,
                   ),
-                  child:Card(
-                    child :ListTile(
-                      title: Text(listCircuit[index].nom),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        CircuitDetailsView(title: 'Détailes du circuit'),
+                        duration: Duration(seconds: 1),
+                      );
+                    },
+                    child: Card(
+                      child :ListTile(
+                        title: Text(listCircuit[index].nom),
+                      ),
                     ),
                   ),
                 );

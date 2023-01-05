@@ -7,6 +7,7 @@ class CircuitRepository{
   final List<Circuit> listCircuits;
 
   CircuitRepository({required this.listCircuits}){
+    // retrieve
     List<Circuit> circuits = listCircuits.map((e) => Circuit(id: e.id, nom: e.nom, pays: e.pays)).toList();
     _circuitController.add(circuits);
   }
@@ -16,6 +17,7 @@ class CircuitRepository{
   Stream<List<Circuit>> get circuits => _circuitController.stream;
 
   Future<void> addNewCircuit(Circuit circuit) async {
+    // add
     print("addNewCircuit triggered");
     listCircuits.add(circuit);
     List<Circuit> circuits = listCircuits.map((e) => Circuit(id: e.id, nom: e.nom, pays: e.pays)).toList();
@@ -23,6 +25,7 @@ class CircuitRepository{
   }
 
   Future<void> removeCircuit(int id) async {
+    // remove
     print("removeCircuit triggered");
     listCircuits.removeWhere((e) => e.id == id);
     List<Circuit> circuits = listCircuits.map((e) => Circuit(id: e.id, nom: e.nom, pays: e.pays)).toList();
