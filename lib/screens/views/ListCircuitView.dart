@@ -15,10 +15,8 @@ class ListCircuitView extends StatelessWidget{
 
       print('state is : $state');
       if(state is ListCircuitUpdatedState){
-        print(state);
-        print(state.listCircuit);
         this.listCircuit = state.listCircuit;
-        print(this.listCircuit);
+        print('liste afficher : $listCircuit');
       }
       return listCircuit.isEmpty
           ? const Center(child: Text('Pas de circuits'))

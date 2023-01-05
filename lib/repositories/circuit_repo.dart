@@ -15,9 +15,15 @@ class CircuitRepository{
 
   Stream<List<Circuit>> get circuits => _circuitController.stream;
 
-     // Stream.value(
-   //
- // );
+  Future<void> addNewCircuit(Circuit circuit) async {
+    listCircuits.add(circuit);
+    List<Circuit> circuits = listCircuits.map((e) => Circuit(id: e.id, nom: e.nom, pays: e.pays)).toList();
+    _circuitController.add(circuits);
+  }
 
-
+  Future<void> removeCircuit(int id) async {
+    listCircuits.removeWhere((e) => e.id == id);
+    List<Circuit> circuits = listCircuits.map((e) => Circuit(id: e.id, nom: e.nom, pays: e.pays)).toList();
+    _circuitController.add(circuits);
+  }
 }

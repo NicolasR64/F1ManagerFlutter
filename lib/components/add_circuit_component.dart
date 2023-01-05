@@ -19,7 +19,7 @@ class AddCircuitComponent extends StatelessWidget {
       context: context,
       builder: (context) => BlocListener<AddCircuitBloc, AddCircuitState>(
           listener: (context, state) {
-            if(state is AddCircuitSuccess){
+            if(state is AddCircuitSuccessState){
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Circuit ajouté avec succès!')));
             }

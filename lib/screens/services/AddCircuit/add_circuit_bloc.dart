@@ -13,10 +13,12 @@ part 'add_circuit_state.dart';
 class AddCircuitBloc extends Bloc<AddCircuitEvent, AddCircuitState> {
   final CircuitRepository circuitRepository;
 
-  AddCircuitBloc(this.circuitRepository) : super(AddCircuitInitialStage()) {
-    on<OnAddCircuitEvent>((event, emit) {
+  AddCircuitBloc(this.circuitRepository) : super(AddCircuitInitialState()) {
+    on<OnAddCircuitEvent>((event, emit) async {
       final Circuit circuit = Circuit(id: 0, nom: event.circuitNom, pays: event.circuitPays);
-      emit(AddCircuitSuccess());
+      await circuitRepository.addNewCircuit(circuit);
+      print('circuit ajouter : $circuit');
+      emit(AddCircuitSuccessState(timestamp: DateTime.now().millisecondsSinceEpoch));
     });
   }
 }
