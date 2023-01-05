@@ -49,7 +49,7 @@ class AddCircuitComponent extends StatelessWidget {
                         child: TextField(
                             controller: _controllerPays,
                             decoration: const InputDecoration(
-                                hintText: "Pay :"
+                                hintText: "Pays :"
                             )
                         )
                     ),
