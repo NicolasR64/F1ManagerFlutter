@@ -18,7 +18,7 @@ Future<void> main() async{
 
     onCreate: (db, version) {
       return db.execute(
-        'CREATE TABLE circuits(id INTEGER PRIMARY KEY,nom TEXT,pays TEXT)',
+          'CREATE TABLE ecuries(id INTEGER PRIMARY KEY,nom TEXT); CREATE TABLE circuits(id INTEGER PRIMARY KEY,nom TEXT,pays TEXT)',
       );
     },
     version: 1,

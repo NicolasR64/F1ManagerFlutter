@@ -33,11 +33,11 @@ class _HomeScreenState extends State<HomeScreen>{
       }
       break;
       case 2:{
-        return AddEcurieComponent();
+        return null;
       }
       break;
       case 3:{
-        return null;
+        return AddEcurieComponent();
       }
       break;
     }

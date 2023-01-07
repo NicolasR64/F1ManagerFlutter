@@ -32,9 +32,9 @@ class EcurieRepository{
   Future<void> addNewEcurie(Ecurie newEcurie) async {
     // add
     newEcurie.id = listEcuries.length + 1 ;
-    database.insert("circuits", newEcurie.toMap(), conflictAlgorithm: ConflictAlgorithm.replace,);
+    database.insert("ecuries", newEcurie.toMap(), conflictAlgorithm: ConflictAlgorithm.replace,);
 
-    print("addNewCircuit triggered");
+    print("addNewEcurie triggered");
     listEcuries.add(newEcurie);
 
     List<Ecurie> ecurie = listEcuries.map((e) => Ecurie(id: e.id, nom: e.nom)).toList();
