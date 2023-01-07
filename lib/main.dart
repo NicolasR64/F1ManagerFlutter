@@ -6,10 +6,13 @@ import 'package:f1_project_manager/screens/models/Circuit.dart';
 import 'package:f1_project_manager/screens/models/Ecurie.dart';
 import 'package:f1_project_manager/screens/models/Pilote.dart';
 import 'package:f1_project_manager/screens/services/AddEcurie/add_ecurie_bloc.dart';
+import 'package:f1_project_manager/screens/services/AddPilote/add_pilote_bloc.dart';
 import 'package:f1_project_manager/screens/services/ListCircuit/list_circuit_bloc.dart';
 import 'package:f1_project_manager/screens/services/ListEcurie/list_ecurie_bloc.dart';
+import 'package:f1_project_manager/screens/services/ListPilote/list_pilote_bloc.dart';
 import 'package:f1_project_manager/screens/services/RemoveCircuit/remove_circuit_bloc.dart';
 import 'package:f1_project_manager/screens/services/RemoveEcurie/remove_ecurie_bloc.dart';
+import 'package:f1_project_manager/screens/services/RemovePilote/remove_pilote_bloc.dart';
 import 'package:f1_project_manager/screens/services/addCircuit/add_circuit_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,12 +28,12 @@ Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
   final Database database = await openDatabase(
-    join(await getDatabasesPath(), 'f1manager.db'),
+    join(await getDatabasesPath(), 'F1manager.db'),
 
     onCreate: (db, version) {
-      return db.execute(
-          'CREATE TABLE ecuries(id INTEGER PRIMARY KEY,nom TEXT); CREATE TABLE circuits(id INTEGER PRIMARY KEY,nom TEXT,pays TEXT)',
-      );
+      db.execute('CREATE TABLE ecuries(id INTEGER PRIMARY KEY,nom TEXT)');
+      db.execute('CREATE TABLE circuits(id INTEGER PRIMARY KEY,nom TEXT,pays TEXT)');
+      db.execute('CREATE TABLE pilotes(id INTEGER PRIMARY KEY,nom TEXT, prenom TEXT, numero TEXT, ecurie TEXT, points int)');
     },
     version: 1,
   );
@@ -42,6 +45,10 @@ Future<void> main() async{
   final PiloteRepository piloteRepository = PiloteRepository(listPilotes: listPilotes, database: database);
 
   await circuitRepository.initialize();
+
+  await ecurieRepository.initialize();
+
+  await piloteRepository.initialize();
 
   runApp(MyApp(circuitRepository: circuitRepository, ecurieRepository: ecurieRepository, piloteRepository: piloteRepository,));
 }
@@ -80,6 +87,16 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<RemoveEcurieBloc>(
             create: (context) => RemoveEcurieBloc(ecurieRepository),
+          ),
+          BlocProvider<ListPiloteBloc>(
+            lazy: false,
+            create: (context) => ListPiloteBloc(piloteRepository),
+          ),
+          BlocProvider<AddPiloteBloc>(
+            create: (context) => AddPiloteBloc(piloteRepository),
+          ),
+          BlocProvider<RemovePiloteBloc>(
+            create: (context) => RemovePiloteBloc(piloteRepository),
           )
         ],
         child: GetMaterialApp(

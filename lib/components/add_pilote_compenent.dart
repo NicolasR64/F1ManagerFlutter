@@ -4,11 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../screens/services/AddEcurie/add_ecurie_bloc.dart';
+import '../screens/services/AddPilote/add_pilote_bloc.dart';
 
-class AddEcurieComponent extends StatelessWidget {
-  AddEcurieComponent({Key? key}) : super(key: key);
+class AddPiloteComponent extends StatelessWidget {
+  AddPiloteComponent({Key? key}) : super(key: key);
 
   final TextEditingController _controllerNom = TextEditingController();
+  final TextEditingController _controllerPrenom = TextEditingController();
+  final TextEditingController _controllerNumero = TextEditingController();
+  final TextEditingController _controllerEcurie = TextEditingController();
+  final TextEditingController _controllerPoints = TextEditingController();
 
   @override
   void dispose(){
@@ -17,11 +22,11 @@ class AddEcurieComponent extends StatelessWidget {
 
   void _modal(BuildContext context) => showModalBottomSheet(
       context: context,
-      builder: (context) => BlocListener<AddEcurieBloc, AddEcurieState>(
+      builder: (context) => BlocListener<AddPiloteBloc, AddPiloteState>(
           listener: (context, state) {
-            if(state is AddEcurieSuccessState){
+            if(state is AddPiloteSuccessState){
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ecurie ajouté avec succès!')));
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Pilote ajouté avec succès!')));
             }
             // TO DO
             // Reload list
@@ -31,7 +36,7 @@ class AddEcurieComponent extends StatelessWidget {
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Création d'écurie",
+                      "Création de pilotes",
                       style: Theme.of(context).textTheme.headline6,
                     )
                 ),
@@ -41,6 +46,42 @@ class AddEcurieComponent extends StatelessWidget {
                         controller: _controllerNom,
                         decoration: const InputDecoration(
                             hintText: "Nom :"
+                        )
+                    )
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                        controller: _controllerPrenom,
+                        decoration: const InputDecoration(
+                            hintText: "Prenom :"
+                        )
+                    )
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                        controller: _controllerNumero,
+                        decoration: const InputDecoration(
+                            hintText: "Numero :"
+                        )
+                    )
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                        controller: _controllerEcurie,
+                        decoration: const InputDecoration(
+                            hintText: "Ecurie :"
+                        )
+                    )
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                        controller: _controllerPoints,
+                        decoration: const InputDecoration(
+                            hintText: "Points :"
                         )
                     )
                 ),
@@ -60,7 +101,7 @@ class AddEcurieComponent extends StatelessWidget {
                         TextButton(
                             onPressed: () {
                               if(_controllerNom.text.isNotEmpty){
-                                context.read<AddEcurieBloc>().add(OnAddEcurieEvent(ecurieNom: _controllerNom.text));
+                                context.read<AddPiloteBloc>().add(OnAddPiloteEvent(piloteNom: _controllerNom.text, pilotePrenom: _controllerPrenom.text, piloteNumero: _controllerNumero.text, piloteEcurie: _controllerEcurie.text, pilotePoints: int.parse(_controllerPoints.text)));
                                 _controllerNom.clear();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(

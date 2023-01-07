@@ -6,6 +6,7 @@ import 'package:f1_project_manager/screens/views/championnatView.dart';
 
 import '../components/add_circuit_component.dart';
 import '../components/add_ecurie_component.dart';
+import '../components/add_pilote_compenent.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen>{
       }
       break;
       case 2:{
-        return null;
+        return AddPiloteComponent();
       }
       break;
       case 3:{

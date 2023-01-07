@@ -27,7 +27,7 @@ class ListPilotesView extends StatelessWidget{
           listPilote = state.listPilote;
         }
         return listPilote.isEmpty
-            ? const Center(child: Text('Pas de circuits'))
+            ? const Center(child: Text('Pas de pilotes'))
             : ListView.builder(
             itemCount: listPilote.length,
             itemBuilder: (context, index) {
