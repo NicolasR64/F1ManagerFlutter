@@ -13,7 +13,7 @@ class RemovePiloteBloc extends Bloc<RemovePiloteEvent, RemovePiloteState> {
   final PiloteRepository piloteRepository;
 
   RemovePiloteBloc(this.piloteRepository) : super(RemovePiloteInitial()) {
-    on<RemovePiloteEvent>((event, emit) async{
+    on<OnRemovePiloteEvent>((event, emit) async{
       print("OnRemoveEcurieEvent triggered");
       await piloteRepository.removePilote(event.id);
       emit(RemovePiloteSuccess(timestamp: DateTime.now().millisecondsSinceEpoch));

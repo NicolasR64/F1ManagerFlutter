@@ -2,9 +2,6 @@ part of 'list_pilote_bloc.dart';
 
 abstract class ListPiloteState extends Equatable {
   const ListPiloteState();
-}
-
-class ListPiloteInitial extends ListPiloteState {
   @override
   List<Object> get props => [];
 }
@@ -18,7 +15,7 @@ class ListPiloteInitialState extends ListPiloteState{
   List<Object> get props => [listPilote];
 }
 
-class ListEcurieUpdatedState extends ListPiloteState{
+class ListPiloteUpdatedState extends ListPiloteState{
   final List<Pilote> listPilote;
 
   const ListPiloteUpdatedState({required this.listPilote});

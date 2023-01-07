@@ -12,7 +12,7 @@ part 'list_pilote_state.dart';
 class ListPiloteBloc extends Bloc<ListPiloteEvent, ListPiloteState> {
   final PiloteRepository piloteRepository;
 
-  ListPiloteBloc(this.piloteRepository) : super(ListPiloteInitial(listPilote: List<Pilote>.from([]))) {
+  ListPiloteBloc(this.piloteRepository) : super(ListPiloteInitialState(listPilote: List<Pilote>.from([]))) {
     StreamSubscription<List<Pilote>> _streamSubscription = piloteRepository.pilotes.listen((listPilote) {
       print('_streamSubscription pilotes triggered');
       add(_OnUpdatedListPiloteEvent(pilotes: listPilote));
