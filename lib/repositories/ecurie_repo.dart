@@ -29,13 +29,13 @@ class EcurieRepository{
     _ecurieController.add(listEcuries);
   }
 
-  Future<void> addNewEcurie(Ecurie ecurie) async {
+  Future<void> addNewEcurie(Ecurie newEcurie) async {
     // add
-    ecurie.id = listEcuries.length + 1 ;
-    database.insert("circuits", ecurie.toMap(), conflictAlgorithm: ConflictAlgorithm.replace,);
+    newEcurie.id = listEcuries.length + 1 ;
+    database.insert("circuits", newEcurie.toMap(), conflictAlgorithm: ConflictAlgorithm.replace,);
 
     print("addNewCircuit triggered");
-    listEcuries.add(ecurie);
+    listEcuries.add(newEcurie);
 
     List<Ecurie> ecurie = listEcuries.map((e) => Ecurie(id: e.id, nom: e.nom)).toList();
     _ecurieController.add(ecurie);
@@ -47,7 +47,7 @@ class EcurieRepository{
 
     print("removeEcurie triggered");
     listEcuries.removeWhere((e) => e.id == id);
-    List<Ecurie> circuits = listEcuries.map((e) => Ecurie(id: e.id, nom: e.nom)).toList();
+    List<Ecurie> ecuries = listEcuries.map((e) => Ecurie(id: e.id, nom: e.nom)).toList();
     _ecurieController.add(ecuries);
   }
 }
