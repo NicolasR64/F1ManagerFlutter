@@ -6,6 +6,7 @@ import 'package:f1_project_manager/screens/services/RemoveCircuit/remove_circuit
 import 'package:f1_project_manager/screens/services/addCircuit/add_circuit_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
             create: (context) => RemoveCircuitBloc(circuitRepository),
           )
         ],
-        child: MaterialApp(
+        child: GetMaterialApp(
           title: 'F1 Manager 2024',
           theme: ThemeData(
             primarySwatch: Colors.blue,

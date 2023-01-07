@@ -43,8 +43,8 @@ class ListCircuitView extends StatelessWidget{
                   child: GestureDetector(
                     onTap: () {
                       Get.to(
-                        CircuitDetailsView(title: 'Détailes du circuit'),
-                        duration: Duration(seconds: 1),
+                        CircuitDetailsView(circuit: listCircuit[index],),
+                        duration: const Duration(seconds: 1),
                       );
                     },
                     child: Card(
