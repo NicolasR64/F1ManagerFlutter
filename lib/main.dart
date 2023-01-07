@@ -1,14 +1,22 @@
 import 'package:f1_project_manager/repositories/circuit_repo.dart';
+import 'package:f1_project_manager/repositories/ecurie_repo.dart';
 import 'package:f1_project_manager/screens/HomeScreen.dart';
 import 'package:f1_project_manager/screens/models/Circuit.dart';
+import 'package:f1_project_manager/screens/models/Ecurie.dart';
+import 'package:f1_project_manager/screens/services/AddEcurie/add_ecurie_bloc.dart';
 import 'package:f1_project_manager/screens/services/ListCircuit/list_circuit_bloc.dart';
+import 'package:f1_project_manager/screens/services/ListEcurie/list_ecurie_bloc.dart';
 import 'package:f1_project_manager/screens/services/RemoveCircuit/remove_circuit_bloc.dart';
+import 'package:f1_project_manager/screens/services/RemoveEcurie/remove_ecurie_bloc.dart';
 import 'package:f1_project_manager/screens/services/addCircuit/add_circuit_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
+final List<Circuit> listCircuits = [];
+final List<Ecurie> listEcuries = [];
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,17 +34,19 @@ Future<void> main() async{
 
   final CircuitRepository circuitRepository = CircuitRepository(listCircuits: listCircuits, database: database);
 
+  final EcurieRepository ecurieRepository = EcurieRepository(listEcuries: listEcuries, database: database);
+
   await circuitRepository.initialize();
 
-  runApp(MyApp(circuitRepository: circuitRepository,));
+  runApp(MyApp(circuitRepository: circuitRepository, ecurieRepository: ecurieRepository,));
 }
 
-final List<Circuit> listCircuits = [];
 
 class MyApp extends StatelessWidget {
   final CircuitRepository circuitRepository;
+  final EcurieRepository ecurieRepository;
 
-  MyApp({super.key, required this.circuitRepository,});
+  MyApp({super.key, required this.circuitRepository, required this.ecurieRepository});
 
   // This widget is the root of your application.
   @override
@@ -49,11 +59,21 @@ class MyApp extends StatelessWidget {
               lazy: false,
               create: (context) => ListCircuitBloc(circuitRepository),
           ),
-          BlocProvider(
+          BlocProvider<AddCircuitBloc>(
               create: (context) => AddCircuitBloc(circuitRepository),
           ),
-          BlocProvider(
+          BlocProvider<RemoveCircuitBloc>(
             create: (context) => RemoveCircuitBloc(circuitRepository),
+          ),
+          BlocProvider<ListEcurieBloc>(
+            lazy: false,
+            create: (context) => ListEcurieBloc(ecurieRepository),
+          ),
+          BlocProvider<AddEcurieBloc>(
+            create: (context) => AddEcurieBloc(ecurieRepository),
+          ),
+          BlocProvider<RemoveEcurieBloc>(
+            create: (context) => RemoveEcurieBloc(ecurieRepository),
           )
         ],
         child: GetMaterialApp(
