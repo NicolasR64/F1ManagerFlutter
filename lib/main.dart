@@ -1,8 +1,10 @@
 import 'package:f1_project_manager/repositories/circuit_repo.dart';
 import 'package:f1_project_manager/repositories/ecurie_repo.dart';
+import 'package:f1_project_manager/repositories/pilote_repo.dart';
 import 'package:f1_project_manager/screens/HomeScreen.dart';
 import 'package:f1_project_manager/screens/models/Circuit.dart';
 import 'package:f1_project_manager/screens/models/Ecurie.dart';
+import 'package:f1_project_manager/screens/models/Pilote.dart';
 import 'package:f1_project_manager/screens/services/AddEcurie/add_ecurie_bloc.dart';
 import 'package:f1_project_manager/screens/services/ListCircuit/list_circuit_bloc.dart';
 import 'package:f1_project_manager/screens/services/ListEcurie/list_ecurie_bloc.dart';
@@ -17,6 +19,7 @@ import 'package:sqflite/sqflite.dart';
 
 final List<Circuit> listCircuits = [];
 final List<Ecurie> listEcuries = [];
+final List<Pilote> listPilotes = [];
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,17 +39,20 @@ Future<void> main() async{
 
   final EcurieRepository ecurieRepository = EcurieRepository(listEcuries: listEcuries, database: database);
 
+  final PiloteRepository piloteRepository = PiloteRepository(listPilotes: listPilotes, database: database);
+
   await circuitRepository.initialize();
 
-  runApp(MyApp(circuitRepository: circuitRepository, ecurieRepository: ecurieRepository,));
+  runApp(MyApp(circuitRepository: circuitRepository, ecurieRepository: ecurieRepository, piloteRepository: piloteRepository,));
 }
 
 
 class MyApp extends StatelessWidget {
   final CircuitRepository circuitRepository;
   final EcurieRepository ecurieRepository;
+  final PiloteRepository piloteRepository;
 
-  MyApp({super.key, required this.circuitRepository, required this.ecurieRepository});
+  MyApp({super.key, required this.circuitRepository, required this.ecurieRepository, required this.piloteRepository,});
 
   // This widget is the root of your application.
   @override

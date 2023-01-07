@@ -5,7 +5,7 @@ class Pilote{
   String nom;
   String prenom;
   String numero;
-  Ecurie ecurie;
+  String ecurie;
   int points;
 
   Pilote({

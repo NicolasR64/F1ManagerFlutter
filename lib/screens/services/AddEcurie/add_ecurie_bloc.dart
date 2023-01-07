@@ -17,8 +17,8 @@ class AddEcurieBloc extends Bloc<AddEcurieEvent, AddEcurieState> {
   AddEcurieBloc(this.ecurieRepository) : super(AddEcurieInitialState()) {
     on<OnAddEcurieEvent>((event, emit) async {
       print('OnAddCircuitEvent triggered');
-      final Ecurie circuit = Ecurie(id: 0, nom: event.ecurieNom);
-      await ecurieRepository.addNewEcurie(circuit);
+      final Ecurie ecurie = Ecurie(id: 0, nom: event.ecurieNom);
+      await ecurieRepository.addNewEcurie(ecurie);
       emit(AddEcurieSuccessState(timestamp: DateTime.now().millisecondsSinceEpoch));
     });
   }
