@@ -34,6 +34,50 @@ class _piloteDetailsViewState extends State<PiloteDetailsView> {
                 textAlign: TextAlign.left,
               ),
             ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child:
+              Text(
+                'Prénom de du pilote : ${widget.pilote.prenom}',
+                style: const TextStyle(
+                  fontSize: 15.0,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child:
+              Text(
+                'Numéro de du pilote : ${widget.pilote.numero}',
+                style: const TextStyle(
+                  fontSize: 15.0,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child:
+              Text(
+                'Ecurie de du pilote : ${widget.pilote.ecurie}',
+                style: const TextStyle(
+                  fontSize: 15.0,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child:
+              Text(
+                'Points de du pilote : ${widget.pilote.points}',
+                style: const TextStyle(
+                  fontSize: 15.0,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
             TextButton(
               onPressed: () {
                 Get.back();

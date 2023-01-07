@@ -44,7 +44,7 @@ class PiloteRepository{
     await database.delete("pilotes", where: 'id = ?', whereArgs: [id]);
 
     print("removePilote triggered");
-    listEcuries.removeWhere((e) => e.id == id);
+    listPilotes.removeWhere((e) => e.id == id);
     List<Pilote> pilotes = listPilotes.map((e) => Pilote(id: e.id, nom: e.nom, prenom: e.prenom, numero: e.numero, ecurie: e.ecurie, points: e.points)).toList();
     _piloteController.add(pilotes);
   }
