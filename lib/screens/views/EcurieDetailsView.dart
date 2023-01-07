@@ -4,22 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../models/Ecurie.dart';
 
 
-class CircuitDetailsView extends StatefulWidget {
-  Circuit circuit;
-  CircuitDetailsView({Key? key, required this.circuit}) : super(key: key);
+
+class EcurieDetailsView extends StatefulWidget {
+  Ecurie ecurie;
+  EcurieDetailsView({Key? key, required this.ecurie}) : super(key: key);
 
   @override
-  State<CircuitDetailsView> createState() => _circuitDetailsViewState();
+  State<EcurieDetailsView> createState() => _ecurieDetailsViewState();
 }
 
-class _circuitDetailsViewState extends State<CircuitDetailsView> {
+class _ecurieDetailsViewState extends State<EcurieDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Circuit: ${widget.circuit.nom}'),
+        title: Text('Ecurie: ${widget.ecurie.nom}'),
       ),
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -28,18 +30,7 @@ class _circuitDetailsViewState extends State<CircuitDetailsView> {
               padding: EdgeInsets.all(16.0),
               child:
               Text(
-                'Nom du circuit : ${widget.circuit.nom}',
-                style: const TextStyle(
-                  fontSize: 15.0,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child:
-              Text(
-                'Pays : ${widget.circuit.pays}',
+                'Nom de l\'Ecurie : ${widget.ecurie.nom}',
                 style: const TextStyle(
                   fontSize: 15.0,
                 ),
@@ -50,7 +41,7 @@ class _circuitDetailsViewState extends State<CircuitDetailsView> {
               onPressed: () {
                 Get.back();
               },
-              child:  const Text("Revenir à la liste des circuits"),
+              child:  const Text("Revenir à la liste des ecuries"),
             ),
           ]
       ),

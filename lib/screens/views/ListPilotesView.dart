@@ -5,6 +5,6 @@ class ListPilotesView extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("ListPilotesView"));
+    return const Center(child: Text("Arrive prochainements"));
   }
 }
