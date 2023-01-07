@@ -27,7 +27,7 @@ class ListEcuriesView extends StatelessWidget{
           listEcurie = state.listEcurie;
         }
         return listEcurie.isEmpty
-            ? const Center(child: Text('Pas de circuits'))
+            ? const Center(child: Text('Pas de ecuries'))
             : ListView.builder(
             itemCount: listEcurie.length,
             itemBuilder: (context, index) {
