@@ -5,6 +5,6 @@ class championnatView extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Championnat"));
+    return const Center(child: Text("La prochaine saison reprend le 5 mars 2023 à Bahreïn!"));
   }
 }
