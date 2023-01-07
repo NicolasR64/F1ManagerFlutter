@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../screens/services/AddEcurie/add_ecurie_bloc.dart';
 
-class AddCircuitComponent extends StatelessWidget {
-  AddCircuitComponent({Key? key}) : super(key: key);
+class AddEcurieComponent extends StatelessWidget {
+  AddEcurieComponent({Key? key}) : super(key: key);
 
   final TextEditingController _controllerNom = TextEditingController();
 

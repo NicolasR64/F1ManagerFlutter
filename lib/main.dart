@@ -31,9 +31,7 @@ Future<void> main() async{
   runApp(MyApp(circuitRepository: circuitRepository,));
 }
 
-Circuit circuit01 = new Circuit(id: 01, nom: 'monacco', pays: 'france');
-Circuit circuit02 = new Circuit(id: 02, nom: 'spa', pays: 'belgique');
-final List<Circuit> listCircuits = [circuit01, circuit02];
+final List<Circuit> listCircuits = [];
 
 class MyApp extends StatelessWidget {
   final CircuitRepository circuitRepository;
